@@ -84,7 +84,7 @@ jobs:
       if: ${{ github.ref == 'refs/heads/main'}}
       id: tag-the-image
       run: |
-        docker tag screenshot:test screenshot:${{ steps.tag-bump.outputs.new_tag }}
+        docker tag screenshot:test dvir33/screenshot:${{ steps.tag-bump.outputs.new_tag }}
         docker images
     
     - name: Login to Docker Hub
