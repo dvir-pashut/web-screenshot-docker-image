@@ -50,8 +50,9 @@ jobs:
       run: |
         python3 app.py https://justdvir.online
         if ls screenshot.png ; then 
-          great
+          echo great
         else 
+          echo badddd
           exit 1
         fi 
            
