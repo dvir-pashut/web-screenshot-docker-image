@@ -35,14 +35,14 @@ jobs:
       id: code-validation
       run: |
         pip3 install -r requirements.txt
-        # pylint --output score.txt app.py
-        # export score=$(cat score.txt | grep -oP '(?<=Your code has been rated at )\d+\.\d+')
-        # if [[ $score == "10.00" ]]; then
-        #   echo great
-        # else
-        #   echo baddddd
-        #   exit 1
-        # fi
+        pylint --output score.txt app.py
+        export score=$(cat score.txt | grep -oP '(?<=Your code has been rated at )\d+\.\d+')
+        if [[ $score == "10.00" ]]; then
+          echo great
+        else
+          echo baddddd
+          exit 1
+        fi
 
 
     - name: unit-testing
