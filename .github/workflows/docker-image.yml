@@ -52,7 +52,8 @@ jobs:
         if ls screenshot.png ; then 
           great
         else 
-          exit 1 
+          exit 1
+        fi 
            
     - name: Build the Docker image
       id: build
