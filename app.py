@@ -27,7 +27,7 @@ def is_valid_url(url):
         bool: True if the URL is valid, False otherwise.
     '''
     try:
-        response = requests.head(url)
+        response = requests.head(url, timeout=10)
         return response.status_code == 200
     except requests.exceptions.RequestException:
         return False
