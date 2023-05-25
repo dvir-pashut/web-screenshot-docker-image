@@ -108,6 +108,8 @@ jobs:
     - name: Slack Notification
       uses: act10ns/slack@v2.0.0
       if: failure()
+      env:
+        SCORE: ${{ readFile('score.txt') }}
       with:
         status: ${{ job.status }}
-        message: job failure validation score is $(cat score.txt) 
+        message: "Job failure validation score is ${{ env.SCORE }}"
