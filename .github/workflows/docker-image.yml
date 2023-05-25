@@ -96,7 +96,7 @@ jobs:
     - name: push the image
       if: ${{ github.ref == 'refs/heads/main'}}
       id: publish-to-dockerhub
-      run: docker push screenshot:${{ steps.tag-bump.outputs.new_tag }}
+      run: docker push dvir33/screenshot:${{ steps.tag-bump.outputs.new_tag }}
 
     - name: Slack Notification
       uses: act10ns/slack@v2.0.0
