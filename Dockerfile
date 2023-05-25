@@ -11,6 +11,5 @@ RUN pip3 install -r requirements.txt
 
 COPY app.py .
 
-RUN python3 -m py_compile app.py
 
 ENTRYPOINT ["python3", "app.py"]

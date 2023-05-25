@@ -1,5 +1,5 @@
 import pytest
-from app import is_valid_url, screenshot
+from app.py import is_valid_url, screenshot
 
 @pytest.mark.parametrize("url, expected", [
     ("https://www.example.com", True),
