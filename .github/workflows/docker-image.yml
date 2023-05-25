@@ -107,7 +107,7 @@ jobs:
     
     - name: Read score.txt
       run: |
-        echo "::set-env name=SCORE::$(cat score.txt)"
+        echo "SCORE=$(cat score.txt)" >> $GITHUB_ENV
 
     - name: Slack Notification
       uses: act10ns/slack@v2.0.0
@@ -115,3 +115,4 @@ jobs:
       with:
         status: ${{ job.status }}
         message: "Job failure validation score is ${{ env.SCORE }}"
+
