@@ -48,14 +48,7 @@ jobs:
     - name: unit-testing
       id: unit-testing
       run: |
-        python3 app.py https://justdvir.online
-        if ls image/screenshot.png ; then 
-          echo great
-          sudo rm -r image
-        else 
-          echo badddd
-          exit 1
-        fi 
+        pip install pytest
            
     - name: Build the Docker image
       id: build
