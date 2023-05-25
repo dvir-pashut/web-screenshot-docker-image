@@ -49,6 +49,7 @@ jobs:
       id: unit-testing
       run: |
         pip install pytest
+        export PYTHONPATH=$(pwd):$PYTHONPATH
         pytest tests/unit-tests.py
            
     - name: Build the Docker image
