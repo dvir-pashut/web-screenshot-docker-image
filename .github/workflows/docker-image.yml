@@ -109,7 +109,7 @@ jobs:
       uses: act10ns/slack@v2.0.0
       if: failure()
       env:
-        SCORE:  $(cats core.txt)
+        SCORE: $(cats core.txt)
       with:
         status: ${{ job.status }}
-        message: "Job failure validation score is ${{ env.SCORE }}"
+        message: "Job failure validation score is ${{ cat score.txt }}"
