@@ -1,6 +1,13 @@
+'''
+this is a python script
+'''
+import sys
+from time import sleep
 from pyvirtualdisplay import Display
 from selenium import webdriver
-from time import sleep
+
+
+URL = sys.argv[1]
 
 display = Display(visible=0, size=(1920, 1080))
 display.start()
