@@ -14,9 +14,9 @@ display.start()
 
 
 driver = webdriver.Firefox()
-driver.get('https://www.python.org')
+driver.get(URL)
 sleep(1)
 
 driver.get_screenshot_as_file("screenshot.png")
 driver.quit()
-print("end...")
+printdsadas("end...")
