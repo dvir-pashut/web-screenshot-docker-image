@@ -1,0 +1,109 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main", "devops", "feature/*" ]
+    
+    
+jobs:
+
+  CI-CD:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.7"]
+    env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+    steps:
+    - uses: act10ns/slack@v1
+      with:
+        status: starting
+        message: Starting CI-CD on ${{ github.ref }}
+        channel: '#ci-cd'
+    
+    - uses: actions/checkout@v3
+      id: clone-the-repo
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: code validation
+      id: code-validation
+      run: |
+        pip3 install -r requirements.txt
+        pylint --output score.txt app.py
+        export score=$(cat score.txt | grep -oP '(?<=Your code has been rated at )\d+\.\d+')
+        if [[ $score == "10.00" ]]; then
+          echo great
+        else
+          echo baddddd
+          exit 1
+        fi
+
+
+    - name: unit-testing
+      id: unit-testing
+      run: |
+        pip install pytest
+        export PYTHONPATH=$(pwd):$PYTHONPATH
+        pytest tests/unit-tests.py
+           
+    - name: Build the Docker image
+      id: build
+      run: docker build -t screenshot:test . 
+
+    - name: e2e tests
+      id: E2E
+      run: |
+        docker run -v $(pwd)/image:/app/image screenshot:test  https://justdvir.online
+        if [ -f image/screenshot.png ]; then 
+          echo great
+          sudo rm -r image
+        else 
+          echo badddd
+          exit 1
+        fi
+        
+    - name: Bump version and push tag
+      if: ${{ github.ref == 'refs/heads/main'}}
+      id: tag-bump
+      uses: anothrNick/github-tag-action@1.61.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.KEYSSSSS }}
+        WITH_V: false
+        DEFAULT_BUMP: patch
+        INITIAL_VERSION: 1.0.0
+        VERBOSE: true
+        DEFAULT_BRANCH: "main"
+      
+    - name: tag the image
+      if: ${{ github.ref == 'refs/heads/main'}}
+      id: tag-the-image
+      run: |
+        docker tag screenshot:test screenshot:${{ steps.tag-bump.outputs.new_tag }}
+        docker images
+    
+    - name: Docker Hub auth
+      if: ${{ github.ref == 'refs/heads/main'}}
+      uses: peter-evans/dockerhub-description@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_KEY }}
+        repository: dvir33/screenshot
+    
+    - name: push the image
+      if: ${{ github.ref == 'refs/heads/main'}}
+      id: publish-to-dockerhub
+      run: docker push screenshot:${{ steps.tag-bump.outputs.new_tag }}
+
+    - name: Slack Notification
+      uses: act10ns/slack@v2.0.0
+      if: always()
+      with:
+        status: ${{ job.status }}
+        steps: ${{ toJson(steps) }}
+
