@@ -32,6 +32,7 @@ def is_valid_url(url):
     except requests.exceptions.RequestException:
         return False
 
+
 def screenshot(url):
     '''
     Capture a screenshot of the webpage at the given URL.
