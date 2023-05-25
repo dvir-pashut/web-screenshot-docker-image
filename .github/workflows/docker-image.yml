@@ -49,6 +49,7 @@ jobs:
       id: unit-testing
       run: |
         pip install pytest
+        pytest tests/unit-tests.py
            
     - name: Build the Docker image
       id: build
@@ -64,6 +65,7 @@ jobs:
         else 
           echo badddd
           exit 1
+        fi
         
     - name: Bump version and push tag
       if: ${{ github.ref == 'refs/heads/main'}}
