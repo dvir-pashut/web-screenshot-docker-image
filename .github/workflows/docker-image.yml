@@ -51,6 +51,7 @@ jobs:
         python3 app.py https://justdvir.online
         if ls screenshot.png ; then 
           echo great
+          rm screenshot.png
         else 
           echo badddd
           exit 1
@@ -94,3 +95,11 @@ jobs:
     #     status: ${{ job.status }}
     #     steps: ${{ toJson(steps) }}
     #     channel: '#ci-cd'
+
+    # - name: Slack Notification
+    #   uses: act10ns/slack@v2.0.0
+    #   # send message even if the ci fails
+    #   if: always()
+    #   with:
+    #     status: ${{ job.status }}
+    #     steps: ${{ toJson(steps) }}
