@@ -10,8 +10,8 @@ Returns:
 
 '''
 import sys
-import requests
 from time import sleep
+import requests
 from pyvirtualdisplay import Display
 from selenium import webdriver
 
