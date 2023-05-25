@@ -55,7 +55,7 @@ def screenshot(url):
     driver.get(url)
     sleep(1)
 
-    driver.get_screenshot_as_file("screenshot.png")
+    driver.get_screenshot_as_file("out/screenshot.png")
     driver.quit()
 
 

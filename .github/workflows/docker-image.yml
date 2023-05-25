@@ -49,9 +49,9 @@ jobs:
       id: unit-testing
       run: |
         python3 app.py https://justdvir.online
-        if ls screenshot.png ; then 
+        if ls image/screenshot.png ; then 
           echo great
-          rm screenshot.png
+          sudo rm -r image
         else 
           echo badddd
           exit 1
@@ -64,7 +64,13 @@ jobs:
     - name: e2e tests
       id: E2E
       run:
-        echo "need to add e2e"
+        docker run -v $(pwd)/image:/app/out orpak:1  https://justdvir.online
+        if ls image/screenshot.png ; then 
+          echo great
+          sudo rm -r image
+        else 
+          echo badddd
+          exit 1
         
     - name: Bump version and push tag
       if: ${{ github.ref == 'refs/heads/main'}}
@@ -98,3 +104,10 @@ jobs:
       with:
         status: ${{ job.status }}
         steps: ${{ toJson(steps) }}
+    
+    - name: Slack Notification
+      uses: act10ns/slack@v2.0.0
+      if: failure()
+      with:
+        status: ${{ job.status }}
+        message: job failure validation score is $(cat score.txt) 
