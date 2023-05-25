@@ -57,7 +57,7 @@ jobs:
     - name: e2e tests
       id: E2E
       run:
-        docker run -v $(pwd)/image:/app/out orpak:1  https://justdvir.online
+        docker run -v $(pwd)/image:/app/image orpak:1  https://justdvir.online
         if ls image/screenshot.png ; then 
           echo great
           sudo rm -r image
