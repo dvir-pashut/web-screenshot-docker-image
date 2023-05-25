@@ -9,7 +9,7 @@ jobs:
 
   CI-CD:
 
-    runs-on: ubuntu-latest
+    runs-on: python3.7
     env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
 
