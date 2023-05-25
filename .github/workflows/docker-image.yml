@@ -60,7 +60,7 @@ jobs:
       id: E2E
       run:
         docker run -v $(pwd)/image:/app/image screenshot:1  https://justdvir.online
-        if ls image/screenshot.png ; then 
+        if [ -f image/screenshot.png ]; then 
           echo great
           sudo rm -r image
         else 
