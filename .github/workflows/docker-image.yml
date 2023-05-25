@@ -107,13 +107,15 @@ jobs:
     
     - name: Read Score from File
       id: read_score
-      run: echo "::set-output name=score::$(cat core.txt)"
+      run: |
+        echo "SCORE=$(cat core.txt)" >> $GITHUB_ENV
 
     - name: Slack Notification
       uses: act10ns/slack@v2.0.0
       if: failure()
       env:
-        SCORE: ${{ steps.read_score.outputs.score }}
+        SCORE: ${{ env.SCORE }}
       with:
         status: ${{ job.status }}
         message: "Job failure validation score is ${{ env.SCORE }}"
+
