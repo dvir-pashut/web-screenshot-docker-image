@@ -84,7 +84,7 @@ jobs:
       if: ${{ github.ref == 'refs/heads/main'}}
       id: tag-the-image
       run: |
-        docker tag screenshot:test  screenshot:${{ steps.tag-bump.outputs.new_tag }}
+        docker tag screenshot:test screenshot:${{ steps.tag-bump.outputs.new_tag }}
         docker images
     
     - name: Docker Hub auth
@@ -93,6 +93,10 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_KEY }}
         repository: dvir33/screenshot
+    
+    - name: push the image
+      id: publish-to-dockerhub
+      run: docker push screenshot:${{ steps.tag-bump.outputs.new_tag }}
 
     - name: Slack Notification
       uses: act10ns/slack@v2.0.0
