@@ -34,7 +34,7 @@ jobs:
     - name: code validation
       id: code-validation
       run: |
-        pip3 install -r pylint
+        pip3 install pylint
         pylint --output score.txt app.py
         export score=$(cat score.txt | grep -oP '(?<=Your code has been rated at )\d+\.\d+')
         if [[ $score == "10.00" ]]; then
