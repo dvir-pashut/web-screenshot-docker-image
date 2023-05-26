@@ -34,16 +34,16 @@ jobs:
     - name: code validation
       id: code-validation
       run: |
-        pip3 install pylint
+        pip3 install -r requirements.txt
         pylint --output score.txt app.py
         export score=$(cat score.txt | grep -oP '(?<=Your code has been rated at )\d+\.\d+')
         if [[ $score == "10.00" ]]; then
           echo great
         else
           echo baddddd
-          cat output.txt
           exit 1
         fi
+
 
     - name: unit-testing
       id: unit-testing
@@ -105,10 +105,3 @@ jobs:
         status: ${{ job.status }}
         steps: ${{ toJson(steps) }}
 
-    - name: Send custom JSON data to Slack workflow
-      id: slack
-      uses: slackapi/slack-github-action@v1.24.0
-      with:
-        payload-file-path: "./score.txt"
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
