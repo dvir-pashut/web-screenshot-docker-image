@@ -45,12 +45,19 @@ jobs:
         fi
         env
     
+    - name: Read File Content
+      id: read_file
+      run: |
+        file_content=$(cat score.txt)
+        echo "::set-output name=content::$file_content"
+
     - name: Slack Notification
       uses: rtCamp/action-slack-notify@v2
       env:
         SLACK_COLOR: ${{ job.status }} 
-        SLACK_MESSAGE: 'cat score.txt'
+        SLACK_MESSAGE: ${{ steps.read_file.outputs.content }}
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+
 
 
     - name: unit-testing
