@@ -44,11 +44,12 @@ jobs:
           exit 1
         fi
     
-    - name: Send custom JSON data to Slack workflow
-      id: slack
-      uses: slackapi/slack-github-action@v1.24.0
-      with:
-        payload-file-path: "./score.txt"
+    - name: Slack Notification
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_MESSAGE: 'cat score.txt'
+        SLACK_TITLE: validation score
+        
 
 
     - name: unit-testing
