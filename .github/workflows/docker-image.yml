@@ -43,10 +43,11 @@ jobs:
           echo baddddd
           exit 1
         fi
+        env
     
     - uses: act10ns/slack@v1
       with: 
-        message: ${{ cat score.txt }}
+        message: ${{ env }}
 
       if: always()
 
