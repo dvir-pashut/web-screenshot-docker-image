@@ -45,7 +45,7 @@ jobs:
         fi
         env
     
-    - name: Set output
+    - name: finel score 
       run: cat score.txt
 
     - name: unit-testing
