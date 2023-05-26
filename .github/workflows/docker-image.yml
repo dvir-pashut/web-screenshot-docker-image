@@ -45,11 +45,12 @@ jobs:
         fi
         env
     
-    - uses: act10ns/slack@v1
-      with: 
-        message: ${{ env }}
-
-      if: always()
+    - name: Slack Notification
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_COLOR: ${{ job.status }} 
+        SLACK_MESSAGE: 'cat score.txt'
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
 
 
     - name: unit-testing
