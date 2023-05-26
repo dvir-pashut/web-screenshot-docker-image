@@ -47,7 +47,7 @@ jobs:
     
     - name: Set output
       id: read_file
-      run: echo "score=$(cat score.txt)" >> $GITHUB_OUTPUT
+      run: echo "score=$(cat score.txt | tr '-' " ")" >> $GITHUB_OUTPUT
 
     - name: Slack Notification
       uses: rtCamp/action-slack-notify@v2
