@@ -45,9 +45,9 @@ git clone https://github.com/dvir-pashut/web-screenshot-docker-image.git
 
 build the docker image 
 
-'''sh
+```sh
 docker build -t screenshot:test .
-'''
+```
 
 and then run it 
 
