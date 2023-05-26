@@ -8,7 +8,7 @@
 
 ## Usage
 
-of course you should start by making sure that you have dokcer installed (daaaa). if not, refer to [docker docomentations].
+of course you should start by making sure that you have docker installed (daaaa). if not, refer to [docker docomentations].
 
 then run 
  
