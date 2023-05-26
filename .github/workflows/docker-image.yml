@@ -46,17 +46,7 @@ jobs:
         env
     
     - name: Set output
-      id: read_file
-      run: echo "score=$(cat score.txt | tr '-' " ")" >> $GITHUB_OUTPUT
-
-    - name: Slack Notification
-      uses: rtCamp/action-slack-notify@v2
-      env:
-        SLACK_COLOR: ${{ job.status }} 
-        SLACK_MESSAGE: ${{ steps.read_file.outputs.score }}
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-
-
+      run: cat score.txt
 
     - name: unit-testing
       id: unit-testing
