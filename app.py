@@ -34,7 +34,7 @@ def is_valid_url(url):
         return False
 
 
-def screenshot(url):
+def take_screenshot(url):
     '''
     Capture a screenshot of the webpage at the given URL.
 
@@ -69,4 +69,4 @@ if __name__ == "__main__":
         sys.exit(1)
     URL = sys.argv[1]
 
-    screenshot(URL)
+    take_screenshot(URL)
