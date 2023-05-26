@@ -40,7 +40,7 @@ jobs:
         if [[ $score == "10.00" ]]; then
           echo great
         else
-          echo baddddd
+          echo file not found
           exit 1
         fi
         env
@@ -67,7 +67,7 @@ jobs:
           echo great
           sudo rm -r image
         else 
-          echo badddd
+          echo file not found
           exit 1
         fi
         
