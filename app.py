@@ -1,6 +1,6 @@
 '''
 
-Capture a screenshot of the webpage at the given URL and save it locally.
+Capture a screenshot of the webpage at the given URL and save it locally under new folder called image.
 
 syntax:
     python3 app.py <url>
