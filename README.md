@@ -39,9 +39,9 @@ in case you want to build or modify for yourself
 
 first clone the repo 
 
-'''sh
+```sh
 git clone https://github.com/dvir-pashut/web-screenshot-docker-image.git
-'''
+```
 
 build the docker image 
 
