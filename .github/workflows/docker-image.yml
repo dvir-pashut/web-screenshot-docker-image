@@ -105,3 +105,9 @@ jobs:
         status: ${{ job.status }}
         steps: ${{ toJson(steps) }}
 
+    - name: Upload to slack step
+      uses: adrey/slack-file-upload-action@master
+      with:
+        token: ${{ secrets.SLACK_WEBHOOK_URL }}}
+        path: score.txt
+        channel: cd-cd
