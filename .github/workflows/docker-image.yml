@@ -36,6 +36,7 @@ jobs:
       run: |
         pip3 install -r requirements.txt
         pylint --output score.txt app.py
+        cat score.txt
         export score=$(cat score.txt | grep -oP '(?<=Your code has been rated at )\d+\.\d+')
         if [[ $score == "10.00" ]]; then
           echo great
@@ -44,9 +45,6 @@ jobs:
           exit 1
         fi
         env
-    
-    - name: finel score 
-      run: cat score.txt
 
     - name: unit-testing
       id: unit-testing
@@ -88,7 +86,7 @@ jobs:
       id: tag-the-image
       run: |
         docker tag screenshot:test dvir33/screenshot:${{ steps.tag-bump.outputs.new_tag }}
-        docker images
+        docker tag screenshot:test dvir33/screenshot:latest
     
     - name: Login to Docker Hub
       if: ${{ github.ref == 'refs/heads/main'}}
