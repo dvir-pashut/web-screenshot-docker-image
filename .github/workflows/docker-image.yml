@@ -41,7 +41,7 @@ jobs:
         if [[ $score == "10.00" ]]; then
           echo great
         else
-          echo file not found
+          echo score is not good
           exit 1
         fi
 
