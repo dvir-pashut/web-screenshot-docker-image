@@ -35,8 +35,8 @@ jobs:
       id: code-validation
       run: |
         pip3 install -r requirements.txt
-        cat score.txt
         pylint --output score.txt app.py
+        cat score.txt
         export score=$(cat score.txt | grep -oP '(?<=Your code has been rated at )\d+\.\d+')
         if [[ $score == "10.00" ]]; then
           echo great
@@ -45,7 +45,7 @@ jobs:
           exit 1
         fi
         env
-        
+
     - name: unit-testing
       id: unit-testing
       run: |
