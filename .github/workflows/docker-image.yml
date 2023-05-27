@@ -44,7 +44,6 @@ jobs:
           echo file not found
           exit 1
         fi
-        env
 
     - name: unit-testing
       id: unit-testing
@@ -98,7 +97,9 @@ jobs:
     - name: push the image
       if: ${{ github.ref == 'refs/heads/main'}}
       id: publish-to-dockerhub
-      run: docker push dvir33/screenshot:${{ steps.tag-bump.outputs.new_tag }}
+      run: | 
+        docker push dvir33/screenshot:${{ steps.tag-bump.outputs.new_tag }}
+        docker push dvir33/screenshot:latest
 
     - name: Slack Notification
       uses: act10ns/slack@v2.0.0
