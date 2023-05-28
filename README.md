@@ -29,7 +29,12 @@ then run the docker image with the following command
 
 
 ```sh
-docker run --rm  -it -v $(pwd)/image:/app/image dvir33/screenshot  <your URL goes here>
+docker run --rm  -it -v $(pwd)/image:/app/image dvir33/screenshot  <your full URL goes here>
+```
+
+example 
+```sh
+docker run --rm  -it -v $(pwd)/image:/app/image dvir33/screenshot  https://justdvir.online
 ```
 
 this will create a new folder called image and the screenshot will be there
@@ -54,7 +59,7 @@ docker build -t screenshot:test .
 and then run it 
 
 ```sh
-docker run --rm  -it -v $(pwd)/image:/app/image screenshot:test  <your URL goes here>
+docker run --rm  -it -v $(pwd)/image:/app/image screenshot:test  <your full URL goes here>
 ```
 
 
